@@ -148,7 +148,6 @@
   import HeadInfo from '@/components/tools/HeadInfo.vue'
 
   import Trend from '@/components/Trend'
-  import { getLoginfo,getVisitInfo } from '@/api/api'
 
   const rankList = []
   for (let i = 0; i < 7; i++) {
@@ -195,23 +194,23 @@
       setTimeout(() => {
         this.loading = !this.loading
       }, 1000)
-      this.initLogInfo();
+      // this.initLogInfo();
     },
     methods: {
       initLogInfo () {
-        getLoginfo(null).then((res)=>{
-          if(res.success){
-            Object.keys(res.result).forEach(key=>{
-              res.result[key] =res.result[key]+""
-            })
-            this.loginfo = res.result;
-          }
-        })
-        getVisitInfo().then(res=>{
-          if(res.success){
-             this.visitInfo = res.result;
-           }
-         })
+        // getLoginfo(null).then((res)=>{
+        //   if(res.success){
+        //     Object.keys(res.result).forEach(key=>{
+        //       res.result[key] =res.result[key]+""
+        //     })
+        //     this.loginfo = res.result;
+        //   }
+        // })
+        // getVisitInfo().then(res=>{
+        //   if(res.success){
+        //      this.visitInfo = res.result;
+        //    }
+        //  })
       },
     }
   }

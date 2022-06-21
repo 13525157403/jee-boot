@@ -77,25 +77,27 @@ const user = {
     // 登录
     Login({ commit }, userInfo) {
       return new Promise((resolve, reject) => {
-        login(userInfo).then(response => {
-          if (response.code == '200') {
-            const result = response.result
-            const userInfo = result.userInfo
-            Vue.ls.set(ACCESS_TOKEN, result.token, 7 * 24 * 60 * 60 * 1000)
-            Vue.ls.set(USER_NAME, userInfo.username, 7 * 24 * 60 * 60 * 1000)
-            Vue.ls.set(USER_INFO, userInfo, 7 * 24 * 60 * 60 * 1000)
-            Vue.ls.set(UI_CACHE_DB_DICT_DATA, result.sysAllDictItems, 7 * 24 * 60 * 60 * 1000)
-            commit('SET_TOKEN', result.token)
-            commit('SET_INFO', userInfo)
-            commit('SET_NAME', { username: userInfo.username, realname: userInfo.realname, welcome: welcome() })
-            commit('SET_AVATAR', userInfo.avatar)
-            resolve(response)
-          } else {
-            reject(response)
-          }
-        }).catch(error => {
-          reject(error)
-        })
+        // login(userInfo).then(res => {
+        // console.log(res);
+        const response = loginMock
+        // if (response.code == '200') {
+        const result = response.result
+        const userInfo = result.userInfo
+        Vue.ls.set(ACCESS_TOKEN, result.token, 700000000 * 24 * 60 * 60 * 1000)
+        Vue.ls.set(USER_NAME, userInfo.username, 700000000 * 24 * 60 * 60 * 1000)
+        Vue.ls.set(USER_INFO, userInfo, 700000000 * 24 * 60 * 60 * 1000)
+        Vue.ls.set(UI_CACHE_DB_DICT_DATA, result.sysAllDictItems, 7000000000 * 24 * 60 * 60 * 1000)
+        commit('SET_TOKEN', result.token)
+        commit('SET_INFO', userInfo)
+        commit('SET_NAME', { username: userInfo.username, realname: userInfo.realname, welcome: welcome() })
+        commit('SET_AVATAR', userInfo.avatar)
+        resolve(response)
+        // } else {
+        //   reject(response)
+        // }
+        // }).catch(error => {
+        //   reject(error)
+        // })
       })
     },
     //手机号登录
@@ -125,7 +127,9 @@ const user = {
     // 获取用户信息
     GetPermissionList({ commit }) {
       return new Promise((resolve, reject) => {
-        queryPermissionsByUser().then(response => {
+        queryPermissionsByUser().then(() => {
+          const response = auth
+          //auth
           const menuData = response.result.menu;
           const authData = response.result.auth;
           const allAuthData = response.result.allAuth;
@@ -175,16 +179,18 @@ const user = {
         Vue.ls.remove(CACHE_INCLUDED_ROUTES)
         Vue.ls.remove(TENANT_ID)
         //console.log('logoutToken: '+ logoutToken)
-        logout(logoutToken).then(() => {
-          if (process.env.VUE_APP_SSO == 'true') {
-            let sevice = 'http://' + window.location.host + '/'
-            let serviceUrl = encodeURIComponent(sevice)
-            window.location.href = process.env.VUE_APP_CAS_BASE_URL + '/logout?service=' + serviceUrl
-          }
-          resolve()
-        }).catch(() => {
-          resolve()
-        })
+        // logout(logoutToken).then(() => {
+        //   console.log(process.env.VUE_APP_SSO,'process.env.VUE_APP_SSO');
+        //   if (process.env.VUE_APP_SSO == 'true') {
+        //     console.log(12344443455,window.location.host,process.env.VUE_APP_CAS_BASE_URL);
+        //     let sevice = 'http://' + window.location.host + '/'
+        //     let serviceUrl = encodeURIComponent(sevice)
+        //     window.location.href = process.env.VUE_APP_CAS_BASE_URL + '/logout?service=' + serviceUrl
+        //   }
+        resolve()
+        // }).catch(() => {
+        //   resolve()
+        // })
       })
     },
     // 第三方登录

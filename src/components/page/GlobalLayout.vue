@@ -133,6 +133,7 @@ export default {
     },
   },
   created() {
+    console.log(this.mainRouters,this.permissionMenuList);
     //--update-begin----author:scott---date:20190320------for:根据后台菜单配置，判断是否路由菜单字段，动态选择是否生成路由（为了支持参数URL菜单）------
     //this.menus = this.mainRouters.find((item) => item.path === '/').children;
     this.menus = this.permissionMenuList

@@ -18,7 +18,7 @@
         </a-input>
       </a-form-model-item>
 
-      <a-row :gutter="0">
+      <!-- <a-row :gutter="0">
         <a-col :span="16">
           <a-form-model-item required prop="inputCode">
             <a-input v-model="model.inputCode" size="large" type="text" placeholder="请输入验证码">
@@ -30,7 +30,7 @@
           <img v-if="requestCodeSuccess" style="margin-top: 2px" :src="randCodeImage" @click="handleChangeCheckCode" />
           <img v-else style="margin-top: 2px" src="../../assets/checkcode.png" @click="handleChangeCheckCode" />
         </a-col>
-      </a-row>
+      </a-row> -->
     </a-form-model>
   </div>
 </template>
@@ -72,7 +72,7 @@ export default {
     }
   },
   created() {
-    this.handleChangeCheckCode()
+    // this.handleChangeCheckCode()
   },
   methods: {
     ...mapActions(['Login']),
@@ -136,7 +136,11 @@ export default {
     },
     //账号密码登录
     handleLogin(rememberMe) {
-      this.validateFields(['username', 'password', 'inputCode'], (err) => {
+
+
+
+
+      this.validateFields(['username', 'password'], (err) => {
         if (!err) {
           let loginParams = {
             username: this.model.username,
